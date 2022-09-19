@@ -1,0 +1,23 @@
+{
+  "name": "open-space-api",
+  "version": "1.0.0",
+  "description": "twitter like platform for education purpose only",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.23.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "netlify-cli": "^11.8.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^1.35.6",
+    "bcrypt": "^5.0.1",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1"
+  }
+}

@@ -20,6 +20,7 @@ function createRepository() {
   function mapUser(user) {
     const newUser = { ...user };
     delete newUser.password;
+    delete newUser.is_permanent;
     return newUser;
   }
 

@@ -9,6 +9,7 @@ async function getAllTalksUseCase({ repository }) {
     };
   }));
 
+  // return sort newest to oldest
   return talksWithLikes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 }
 

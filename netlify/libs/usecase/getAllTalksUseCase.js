@@ -9,7 +9,7 @@ async function getAllTalksUseCase({ repository }) {
     };
   }));
 
-  return talksWithLikes;
+  return talksWithLikes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 }
 
 module.exports = getAllTalksUseCase;

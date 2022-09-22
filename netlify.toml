@@ -2,6 +2,11 @@
   publish = "public"
 
 [[redirects]]
+  from = "/"
+  to = "/v1"
+  force = true
+
+[[redirects]]
   from = "/v1/users"
   to = "/.netlify/functions/v1-users"
   status = 200

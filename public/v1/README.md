@@ -3,7 +3,7 @@
 > API untuk platform open space. Mirip Twitter, tetapi cuma untuk bahan belajar di Dicoding.
 
 ## Endpoint 
-https://dicoding-open-space.netlify.app/v1
+https://openspace-api.netlify.app/v1
 
 
 ### Register User

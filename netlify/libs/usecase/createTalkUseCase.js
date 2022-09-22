@@ -7,8 +7,6 @@ async function createTalkUseCase({ text, user, replyTo }, { repository }) {
     return `${prefix}-${randomString}`;
   }
 
-  console.log(text, user, replyTo);
-
   const id = getRandomStringId('talk');
   const createdAt = new Date().toISOString();
 

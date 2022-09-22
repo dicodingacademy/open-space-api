@@ -48,7 +48,7 @@ async function postLoginHandler(request) {
       });
     }
 
-    console.log(error);
+    console.error(error);
 
     return response({
       statusCode: 500,

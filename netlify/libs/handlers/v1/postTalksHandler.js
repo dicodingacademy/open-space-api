@@ -7,7 +7,7 @@ const { response } = require('../../utils/functions');
 function validatePostTalkPayload(payload) {
   const scheme = Joi.object({
     text: Joi.string().required(),
-    replyTo: Joi.string().optional(),
+    replyTo: Joi.string().allow('').optional(),
   });
 
   const { error, value } = scheme.validate(payload);

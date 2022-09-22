@@ -2,26 +2,26 @@
   publish = "public"
 
 [[redirects]]
-  from = "/api/v1/users"
+  from = "/v1/users"
   to = "/.netlify/functions/v1-users"
   status = 200
 
 [[redirects]]
-  from = "/api/v1/login"
+  from = "/v1/login"
   to = "/.netlify/functions/v1-login"
   status = 200
 
 [[redirects]]
-  from = "/api/v1/users/me"
+  from = "/v1/users/me"
   to = "/.netlify/functions/v1-users-me"
   status = 200
 
 [[redirects]]
-  from = "/api/v1/talks"
+  from = "/v1/talks"
   to = "/.netlify/functions/v1-talks"
   status = 200
 
 [[redirects]]
-  from = "/api/v1/talks/likes"
+  from = "/v1/talks/likes"
   to = "/.netlify/functions/v1-likes"
   status = 200

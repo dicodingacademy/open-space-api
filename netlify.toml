@@ -30,3 +30,8 @@
   from = "/v1/talks/likes"
   to = "/.netlify/functions/v1-likes"
   status = 200
+
+[[redirects]]
+  from = "/v1/talks/*"
+  to = "/.netlify/functions/v1-talks-detail"
+  status = 200

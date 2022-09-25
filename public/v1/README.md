@@ -137,6 +137,45 @@ https://openspace-api.netlify.app/v1
     
     ```
 
+### See detail talk
+- URL
+  - `/talks/:id`
+- Method
+  - GET
+- Response
+    ```json
+    {
+      "status": "success",
+      "message": "ok",
+      "data": {
+        "talkDetail": {
+          "id": "talk-8d070f59429110c7b5e3f8ff5105e8aa",
+          "text": "Hello, John!",
+          "user": {
+            "id": "jane_doe",
+            "name": "Jane Doe",
+            "photo": "https://generated-image-url.jpg"
+          },
+          "createdAt": "2022-09-22T10:06:55.588Z",
+          "likes": ["john_doe"],
+          "parent": {
+            "id": "talk-e32730137bbf20bed92b42b4792de20a",
+            "text": "Hello, World!",
+            "user": {
+              "id": "john_doe",
+              "name": "John Doe",
+              "photo": "https://generated-image-url.jpg"
+            },
+            "replyTo": "",
+            "createdAt": "2022-09-22T10:06:55.588Z",
+            "likes": []
+          }
+        }
+      }
+    }
+    
+    ```
+
 ### Create New Talk
 - URL
   - `/talks`

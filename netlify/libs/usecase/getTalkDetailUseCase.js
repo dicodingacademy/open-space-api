@@ -4,6 +4,7 @@ async function getTalkDetailUseCase({ id }, { repository }) {
   const talk = await repository.getTalkById(id);
   let parent = null;
   let userParent = null;
+  let parentLikes = null;
 
   if (!talk) {
     throw new NotFoundError('talk not found');
@@ -18,6 +19,7 @@ async function getTalkDetailUseCase({ id }, { repository }) {
 
   if (parent) {
     userParent = await repository.getUserById(parent.user);
+    parentLikes = await repository.getLikesByTalkId(parent.id);
   }
 
   delete talk.replyTo;
@@ -26,7 +28,11 @@ async function getTalkDetailUseCase({ id }, { repository }) {
     ...talk,
     user,
     likes: likes.map((like) => like.user_id),
-    parent: parent ? { ...parent, user: userParent } : null,
+    parent: parent ? {
+      ...parent,
+      user: userParent,
+      likes: parentLikes.map((like) => like.user_id),
+    } : null,
   };
 }
 

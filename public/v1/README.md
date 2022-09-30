@@ -2,6 +2,8 @@
 
 > API untuk platform open space. Mirip Twitter, tetapi cuma untuk bahan belajar di Dicoding.
 
+*~Jangan terlalu serius. Data `talks` akan dihapus secara berkala.*
+
 ## Endpoint 
 https://openspace-api.netlify.app/v1
 

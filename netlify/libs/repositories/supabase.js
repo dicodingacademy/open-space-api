@@ -108,6 +108,13 @@ function createRepository() {
     if (talkError) throw talkError;
   }
 
+  async function resetData() {
+    const { error } = await supabase
+      .rpc('open_space_reset_data');
+
+    if (error) console.error(error);
+  }
+
   return {
     getUsers,
     getTalks,
@@ -121,6 +128,7 @@ function createRepository() {
     getUserWithPasswordById,
     createTalk,
     isTalkLiked,
+    resetData,
   };
 }
 

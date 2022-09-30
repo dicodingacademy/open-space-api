@@ -1,6 +1,9 @@
 [build]
   publish = "public"
 
+[functions."internal-reset-data"]
+schedule = "@hourly"
+
 [[redirects]]
   from = "/"
   to = "/v1"

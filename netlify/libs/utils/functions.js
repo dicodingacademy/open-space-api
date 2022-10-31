@@ -1,15 +1,13 @@
 const createTokenize = require('../tokenize/jwt');
 
 function response({ statusCode = 200, message = 'ok', data = {} }) {
-  let status = 'unknown';
-
-  if (String(statusCode).startsWith('2')) {
-    status = 'success';
-  } else if (String(statusCode).startsWith('4')) {
-    status = 'fail';
-  } else if (String(statusCode).startsWith('5')) {
-    status = 'error';
+  const statuses = {
+    2: 'success',
+    4: 'fail',
+    5: 'error'
   }
+
+  const status = statuses[String(statusCode)[0]];
 
   return {
     statusCode,

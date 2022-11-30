@@ -1,17 +1,14 @@
 const postTalksLikesHandler = require('../libs/handlers/v1/postTalksLikesHandler');
 const {
-  withAuth,
-  commonHandler,
+  commonWithAuthHandler,
 } = require('../libs/utils/functions');
 
-exports.handler = commonHandler(
-  withAuth((request, _, decoded) => {
-    if (request.httpMethod === 'POST') {
-      return postTalksLikesHandler(request, decoded);
-    }
+exports.handler = commonWithAuthHandler((request) => {
+  if (request.httpMethod === 'POST') {
+    return postTalksLikesHandler(request);
+  }
 
-    return {
-      statusCode: 405,
-    };
-  }),
-);
+  return {
+    statusCode: 405,
+  };
+});

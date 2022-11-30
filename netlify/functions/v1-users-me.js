@@ -1,17 +1,14 @@
 const getUsersMeHandler = require('../libs/handlers/v1/getUsersMeHandler');
 const {
-  withAuth,
-  commonHandler,
+  commonWithAuthHandler,
 } = require('../libs/utils/functions');
 
-exports.handler = commonHandler(
-  withAuth((request, _, { id }) => {
-    if (request.httpMethod === 'GET') {
-      return getUsersMeHandler(id);
-    }
+exports.handler = commonWithAuthHandler((event) => {
+  if (event.httpMethod === 'GET') {
+    return getUsersMeHandler(event);
+  }
 
-    return {
-      statusCode: 405,
-    };
-  }),
-);
+  return {
+    statusCode: 405,
+  };
+});

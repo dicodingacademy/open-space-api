@@ -18,8 +18,10 @@ function validatePostTalksLikesPayload(payload) {
   return value;
 }
 
-async function postTalksLikesHandler(request, { id }) {
+async function postTalksLikesHandler(request) {
   const { body } = request;
+  const { id } = request.authPayload;
+
   const repository = createRepository();
 
   const { talkId } = validatePostTalksLikesPayload(JSON.parse(body));

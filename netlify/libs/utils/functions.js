@@ -35,6 +35,7 @@ function withErrorHandler(next) {
         });
       }
 
+      console.error(error);
       return response({
         statusCode: 500,
         message: 'Internal server error',
@@ -89,9 +90,9 @@ function withAuth(next) {
     const tokenize = createTokenize();
 
     try {
-      const decoded = await tokenize.verifyAccessToken(token);
+      const authPayload = await tokenize.verifyAccessToken(token);
 
-      return next(event, context, decoded);
+      return next({ ...event, authPayload }, context);
     } catch (error) {
       return response({
         statusCode: 401,
@@ -107,10 +108,15 @@ function commonHandler(handler) {
   );
 }
 
+function commonWithAuthHandler(handler) {
+  return commonHandler(
+    withAuth(handler),
+  );
+}
+
 module.exports = {
-  withCors,
   withAuth,
-  withErrorHandler,
   response,
   commonHandler,
+  commonWithAuthHandler,
 };

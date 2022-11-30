@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const ClientError = require('../../exceptions/ClientError');
 const InvariantError = require('../../exceptions/InvariantError');
 const createHasher = require('../../hasher/bcrypt');
 const { createRepository } = require('../../repositories/supabase');
@@ -27,33 +26,17 @@ async function postUserHandler(event) {
   const repository = createRepository();
   const hasher = createHasher();
 
-  try {
-    const { id, name, password } = validatePostUserPayload(JSON.parse(body));
+  const { id, name, password } = validatePostUserPayload(JSON.parse(body));
 
-    const user = await createUserUseCase({ id, name, password }, { repository, hasher });
+  const user = await createUserUseCase({ id, name, password }, { repository, hasher });
 
-    return response({
-      statusCode: 201,
-      message: 'User created',
-      data: {
-        user,
-      },
-    });
-  } catch (error) {
-    if (error instanceof ClientError) {
-      return response({
-        statusCode: error.statusCode,
-        message: error.message,
-      });
-    }
-
-    console.error(error);
-
-    return response({
-      statusCode: 500,
-      message: 'Internal Server Error',
-    });
-  }
+  return response({
+    statusCode: 201,
+    message: 'User created',
+    data: {
+      user,
+    },
+  });
 }
 
 module.exports = postUserHandler;

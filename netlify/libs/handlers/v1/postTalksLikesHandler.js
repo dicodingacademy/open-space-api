@@ -22,29 +22,13 @@ async function postTalksLikesHandler(request, { id }) {
   const { body } = request;
   const repository = createRepository();
 
-  try {
-    const { talkId } = validatePostTalksLikesPayload(JSON.parse(body));
+  const { talkId } = validatePostTalksLikesPayload(JSON.parse(body));
 
-    await toggleLikeUseCase({ talkId, userId: id }, { repository });
+  await toggleLikeUseCase({ talkId, userId: id }, { repository });
 
-    return response({
-      statusCode: 200,
-    });
-  } catch (error) {
-    if (error instanceof InvariantError) {
-      return response({
-        statusCode: 400,
-        message: error.message,
-      });
-    }
-
-    console.error(error);
-
-    return response({
-      statusCode: 500,
-      message: 'Internal Server Error',
-    });
-  }
+  return response({
+    statusCode: 200,
+  });
 }
 
 module.exports = postTalksLikesHandler;

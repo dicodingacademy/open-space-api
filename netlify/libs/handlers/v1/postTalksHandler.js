@@ -23,33 +23,17 @@ async function postTalksHandler(request, _, { id }) {
   const { body } = request;
   const repository = createRepository();
 
-  try {
-    const { text, replyTo } = validatePostTalkPayload(JSON.parse(body));
+  const { text, replyTo } = validatePostTalkPayload(JSON.parse(body));
 
-    const talk = await createTalkUseCase({ text, replyTo, user: id }, { repository });
+  const talk = await createTalkUseCase({ text, replyTo, user: id }, { repository });
 
-    return response({
-      statusCode: 201,
-      message: 'Talk created',
-      data: {
-        talk,
-      },
-    });
-  } catch (error) {
-    if (error instanceof InvariantError) {
-      return response({
-        statusCode: 400,
-        message: error.message,
-      });
-    }
-
-    console.error(error);
-
-    return response({
-      statusCode: 500,
-      message: 'Internal Server Error',
-    });
-  }
+  return response({
+    statusCode: 201,
+    message: 'Talk created',
+    data: {
+      talk,
+    },
+  });
 }
 
 module.exports = postTalksHandler;

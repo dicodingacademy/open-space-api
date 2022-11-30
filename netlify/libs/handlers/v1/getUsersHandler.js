@@ -4,20 +4,11 @@ const { response } = require('../../utils/functions');
 
 async function getUsersHandler() {
   const repository = createRepository();
+  const users = await getAllUsersUseCase(repository);
 
-  try {
-    const users = await getAllUsersUseCase(repository);
-    return response({
-      data: { users },
-    });
-  } catch (error) {
-    console.error(error);
-
-    return response({
-      statusCode: 500,
-      message: 'Internal Server Error',
-    });
-  }
+  return response({
+    data: { users },
+  });
 }
 
 module.exports = getUsersHandler;

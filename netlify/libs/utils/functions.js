@@ -1,11 +1,12 @@
 const createTokenize = require('../tokenize/jwt');
+const ClientError = require('../exceptions/ClientError');
 
 function response({ statusCode = 200, message = 'ok', data = {} }) {
   const statuses = {
     2: 'success',
     4: 'fail',
-    5: 'error'
-  }
+    5: 'error',
+  };
 
   const status = statuses[String(statusCode)[0]];
 
@@ -19,8 +20,31 @@ function response({ statusCode = 200, message = 'ok', data = {} }) {
   };
 }
 
+function withErrorHandler(next) {
+  return async (event, context) => {
+    try {
+      const result = await next(event, context);
+
+      // to keep await
+      return { ...result };
+    } catch (error) {
+      if (error instanceof ClientError) {
+        return response({
+          statusCode: error.statusCode,
+          message: error.message,
+        });
+      }
+
+      return response({
+        statusCode: 500,
+        message: 'Internal server error',
+      });
+    }
+  };
+}
+
 function withCors(next) {
-  return async (request, context) => {
+  return async (event, context) => {
     const headers = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*',
@@ -30,14 +54,14 @@ function withCors(next) {
       'Access-Control-Allow-Credentials': 'true',
     };
 
-    if (request.httpMethod === 'OPTIONS') {
+    if (event.httpMethod === 'OPTIONS') {
       return {
         statusCode: 200,
         headers,
       };
     }
 
-    const originalResponse = await next(request, context);
+    const originalResponse = await next(event, context);
 
     return {
       ...originalResponse,
@@ -51,8 +75,8 @@ function withCors(next) {
 }
 
 function withAuth(next) {
-  return async (request, context) => {
-    const { authorization } = request.headers;
+  return async (event, context) => {
+    const { authorization } = event.headers;
 
     if (!authorization) {
       return response({
@@ -67,7 +91,7 @@ function withAuth(next) {
     try {
       const decoded = await tokenize.verifyAccessToken(token);
 
-      return next(request, context, decoded);
+      return next(event, context, decoded);
     } catch (error) {
       return response({
         statusCode: 401,
@@ -76,4 +100,6 @@ function withAuth(next) {
     }
   };
 }
-module.exports = { withCors, withAuth, response };
+module.exports = {
+  withCors, withAuth, withErrorHandler, response,
+};

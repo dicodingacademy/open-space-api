@@ -2,8 +2,8 @@ const { createRepository } = require('../../repositories/supabase');
 const getOwnProfileUseCase = require('../../usecase/getOwnProfileUseCase');
 const { response } = require('../../utils/functions');
 
-async function getUsersMeHandler(event) {
-  const { id } = event.authPayload;
+async function getUsersMeHandler(authedEvent) {
+  const { id } = authedEvent.authPayload;
 
   const repository = createRepository();
 

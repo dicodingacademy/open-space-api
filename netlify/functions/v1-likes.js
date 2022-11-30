@@ -3,9 +3,9 @@ const {
   commonWithAuthHandler,
 } = require('../libs/utils/functions');
 
-exports.handler = commonWithAuthHandler((request) => {
-  if (request.httpMethod === 'POST') {
-    return postTalksLikesHandler(request);
+exports.handler = commonWithAuthHandler((event) => {
+  if (event.httpMethod === 'POST') {
+    return postTalksLikesHandler(event);
   }
 
   return {

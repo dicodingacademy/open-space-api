@@ -3,9 +3,9 @@ const {
   commonHandler,
 } = require('../libs/utils/functions');
 
-exports.handler = commonHandler((request) => {
-  if (request.httpMethod === 'POST') {
-    return postLoginHandler(request);
+exports.handler = commonHandler((event) => {
+  if (event.httpMethod === 'POST') {
+    return postLoginHandler(event);
   }
 
   return {

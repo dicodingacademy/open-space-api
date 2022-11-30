@@ -19,9 +19,9 @@ function validatePostTalkPayload(payload) {
   return value;
 }
 
-async function postTalksHandler(request) {
-  const { body } = request;
-  const { id } = request.authPayload;
+async function postTalksHandler(authedEvent) {
+  const { body } = authedEvent;
+  const { id } = authedEvent.authPayload;
 
   const repository = createRepository();
 

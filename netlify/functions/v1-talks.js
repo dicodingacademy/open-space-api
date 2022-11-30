@@ -5,13 +5,13 @@ const {
   withAuth,
 } = require('../libs/utils/functions');
 
-exports.handler = commonHandler((request, context) => {
-  if (request.httpMethod === 'GET') {
+exports.handler = commonHandler((event, context) => {
+  if (event.httpMethod === 'GET') {
     return getTalksHandler();
   }
 
-  if (request.httpMethod === 'POST') {
-    return withAuth((authedRequest) => postTalksHandler(authedRequest))(request, context);
+  if (event.httpMethod === 'POST') {
+    return withAuth((authedEvent) => postTalksHandler(authedEvent))(event, context);
   }
 
   return {

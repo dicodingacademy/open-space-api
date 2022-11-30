@@ -4,13 +4,13 @@ const {
   commonHandler,
 } = require('../libs/utils/functions');
 
-exports.handler = commonHandler((request) => {
-  if (request.httpMethod === 'GET') {
+exports.handler = commonHandler((event) => {
+  if (event.httpMethod === 'GET') {
     return getUsersHandler();
   }
 
-  if (request.httpMethod === 'POST') {
-    return postUserHandler(request);
+  if (event.httpMethod === 'POST') {
+    return postUserHandler(event);
   }
 
   return {

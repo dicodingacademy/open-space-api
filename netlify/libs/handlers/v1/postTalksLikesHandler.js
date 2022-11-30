@@ -18,9 +18,9 @@ function validatePostTalksLikesPayload(payload) {
   return value;
 }
 
-async function postTalksLikesHandler(request) {
-  const { body } = request;
-  const { id } = request.authPayload;
+async function postTalksLikesHandler(authedEvent) {
+  const { body } = authedEvent;
+  const { id } = authedEvent.authPayload;
 
   const repository = createRepository();
 

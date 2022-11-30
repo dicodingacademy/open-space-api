@@ -21,8 +21,8 @@ function validatePostLoginPayload(payload) {
   return value;
 }
 
-async function postLoginHandler(request) {
-  const { body } = request;
+async function postLoginHandler(event) {
+  const { body } = event;
 
   const tokenize = createTokenize();
   const hasher = createHasher();

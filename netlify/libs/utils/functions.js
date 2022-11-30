@@ -100,6 +100,17 @@ function withAuth(next) {
     }
   };
 }
+
+function commonHandler(handler) {
+  return withCors(
+    withErrorHandler(handler),
+  );
+}
+
 module.exports = {
-  withCors, withAuth, withErrorHandler, response,
+  withCors,
+  withAuth,
+  withErrorHandler,
+  response,
+  commonHandler,
 };
